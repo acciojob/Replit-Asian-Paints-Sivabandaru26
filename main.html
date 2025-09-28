@@ -1,80 +1,65 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Replit Asian Paints</title>
-  <style>
-    #grid-container {
-      display: grid;
-      grid-template-columns: repeat(3, 100px);
-      grid-template-rows: repeat(3, 100px);
-      gap: 5px;
-      margin-bottom: 20px;
-    }
-    .grid-item {
-      border: 1px solid black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      cursor: pointer;
-      background-color: transparent;
-    }
-    input, button {
-      margin: 5px;
-      padding: 5px;
-    }
-  </style>
+    <title>Replit Asian Paints</title>
+    <style>
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+        }
+        .grid-item {
+            border: 1px solid black;
+            height: 100px;
+            width: 100px;
+        }
+    </style>
 </head>
 <body>
+    <div id="grid-container">
+        <div id="1" class="grid-item"></div>
+        <div id="2" class="grid-item"></div>
+        <div id="3" class="grid-item"></div>
+        <div id="4" class="grid-item"></div>
+        <div id="5" class="grid-item"></div>
+        <div id="6" class="grid-item"></div>
+        <div id="7" class="grid-item"></div>
+        <div id="8" class="grid-item"></div>
+        <div id="9" class="grid-item"></div>
+    </div>
 
-<h2>🎨 Asian Paints Grid</h2>
+    <br>
+    <input type="text" id="block_id" placeholder="Enter block id">
+    <input type="text" id="colour_id" placeholder="Enter colour">
+    <button id="change_button" onclick="changeColor()">Change Color</button>
+    <button id="reset_button" onclick="resetGrid()">Reset</button>
 
-<!-- Added class="grid-container" for Cypress -->
-<div id="grid-container" class="grid-container">
-  <div class="grid-item" id="1">1</div>
-  <div class="grid-item" id="2">2</div>
-  <div class="grid-item" id="3">3</div>
-  <div class="grid-item" id="4">4</div>
-  <div class="grid-item" id="5">5</div>
-  <div class="grid-item" id="6">6</div>
-  <div class="grid-item" id="7">7</div>
-  <div class="grid-item" id="8">8</div>
-  <div class="grid-item" id="9">9</div>
-</div>
+    <script>
+        function changeColor() {
+            let blockId = document.getElementById("block_id").value;
+            let color = document.getElementById("colour_id").value;
+            let gridItems = document.querySelectorAll(".grid-item");
 
-<label>Block ID: <input type="number" id="block_id" min="1" max="9"></label>
-<label>Colour: <input type="text" id="colour_id" placeholder="e.g. red or #ff0000"></label>
-<br>
-<button id="change_button">Change Color</button>
-<!-- ✅ Fix: Cypress expects reset_button -->
-<button id="reset_button">Reset</button>
+            // Reset all cells first
+            gridItems.forEach(item => {
+                item.style.backgroundColor = "transparent";
+            });
 
-<script>
-  const changeButton = document.getElementById("change_button");
-  const resetButton = document.getElementById("reset_button");
-  const gridItems = document.querySelectorAll(".grid-item");
+            // Color only the chosen block
+            if (blockId && document.getElementById(blockId)) {
+                document.getElementById(blockId).style.backgroundColor = color;
+            }
+        }
 
-  function resetGrid() {
-    gridItems.forEach(item => {
-      item.style.backgroundColor = "transparent";
-    });
-  }
-
-  changeButton.addEventListener("click", () => {
-    const blockId = document.getElementById("block_id").value;
-    const color = document.getElementById("colour_id").value;
-
-    resetGrid();
-
-    const targetBlock = document.getElementById(blockId);
-    if (targetBlock) {
-      targetBlock.style.backgroundColor = color;
-    }
-  });
-
-  resetButton.addEventListener("click", resetGrid);
-</script>
-
+        function resetGrid() {
+            let gridItems = document.querySelectorAll(".grid-item");
+            gridItems.forEach(item => {
+                item.style.backgroundColor = "transparent";
+            });
+        }
+    </script>
 </body>
 </html>
+
